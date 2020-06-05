@@ -2,6 +2,8 @@ from django.shortcuts import render
 import requests
 from .models import City
 from .forms import CityForm
+from mood.models import Mood
+from mood.forms import MoodForm
 
 def index(request):
     cities = City.objects.all() #return all the cities in the database
@@ -13,6 +15,8 @@ def index(request):
         form.save() # will validate and save if validate
 
     form = CityForm()
+
+    form2 = MoodForm()
 
     weather_data = []
 
