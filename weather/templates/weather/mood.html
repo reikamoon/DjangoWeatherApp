@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +8,13 @@
   <title>Set your mood</title>
 </head>
 <body>
+{% block content %}
 <h1>Status: {{ mood }}</h1>
-  <form method="POST">
-           {% csrf_token %}
-<label for="mood">Enter Mood: </label>
-<input id="mood" type="text" mood="mood_field" value="">
-<input type="submit" value="OK">
-       </form>
+  <form method="POST" action="">
+      {% csrf_token %}
+      <table>{{ form2 }}</table>
+      <input type="submit" value="Submit"  />
+  </form><br /><br />
+{% endblock content %}
 </body>
 </html>

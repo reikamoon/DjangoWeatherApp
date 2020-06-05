@@ -6,11 +6,11 @@ from .models import Mood as MoodModel
 
 # Create your views here.
 def mood(request):
+    mood = Mood.objects.last()
     if request.method == 'POST':
         form2 = MoodForm(request.POST)
         if form2.is_valid():
             form2.save()
-            mood = Mood.Objects.last()
             print(mood)
 
 

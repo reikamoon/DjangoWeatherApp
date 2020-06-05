@@ -1,10 +1,12 @@
 from django.shortcuts import render
 import requests
 from .models import City
+from mood.models import Mood
 from .forms import CityForm
 
 def index(request):
     cities = City.objects.all() #return all the cities in the database
+    mood = Mood.objects.last()
 
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=271d1234d3f497eed5b1d80a07b3fcd1'
 
@@ -28,6 +30,6 @@ def index(request):
 
         weather_data.append(weather) #add the data for the current city into our list
 
-    context = {'weather_data' : weather_data, 'form' : form}
+    context = {'weather_data' : weather_data, 'form' : form, 'mood': mood}
 
     return render(request, 'weather/index.html', context) #returns the index.html template
