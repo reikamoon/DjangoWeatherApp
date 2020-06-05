@@ -10,15 +10,34 @@ def index(request):
 
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=271d1234d3f497eed5b1d80a07b3fcd1'
 
-    if request.method == 'POST': # only true if form is submitted
-        form = CityForm(request.POST) # add actual request data to form for processing
-        form.save() # will validate and save if validate
-
-    form = CityForm()
-
+    form1 = CityForm()
     form2 = MoodForm()
 
+    # if request.method == 'POST': # only true if form is submitted
+    #     form = CityForm(request.POST) # add actual request data to form for processing
+    #     form2 = MoodForm(request.POST)
+    #     form.save() # will validate and save if validate
+
+    if request.method == 'POST':
+        form1 = CityForm(request.POST, prefix='city')
+        if form1.is_valid():
+            form1.save()
+    else:
+        form1 = CityForm(prefix='city')
+
+    if request.method == 'POST' and not form1.is_valid():
+        form2 = MoodForm(request.POST, prefix='mood')
+        form1 = CityForm(prefix='city')
+        if form2.is_valid():
+            form2.save()
+            mood = data.get('mood')
+
+    else:
+        form2 = MoodForm(prefix='mood')
+
     weather_data = []
+    data = request.POST.copy()
+    mood = data.get('mood-mood')
 
     for city in cities:
 
@@ -33,6 +52,9 @@ def index(request):
 
         weather_data.append(weather) #add the data for the current city into our list
 
-    context = {'weather_data' : weather_data, 'form' : form}
+    print(mood)
+    print(city)
+
+    context = {'weather_data' : weather_data, 'form1' : form1, 'form2': form2, 'mood': mood}
 
     return render(request, 'weather/index.html', context) #returns the index.html template

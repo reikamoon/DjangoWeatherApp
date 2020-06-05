@@ -38,23 +38,16 @@
                 <div class="column is-offset-4 is-4">
                   <form method="POST">
                   {% csrf_token %}
-                  <div class="field has-addons">
-                      <div class="control is-expanded">
-                          {{ form2.name }}
-                      </div>
-                      <div class="control">
-                          <button class="button is-info">
-                              Update Status
-                          </button>
-                      </div>
-                  </div>
+    <label for="mood">Enter Mood: </label>
+    <input id="mood" type="text" mood="mood_field" value="">
+    <input type="submit" value="OK">
               </form>
               <br>
                   <form method="POST">
                   {% csrf_token %}
                   <div class="field has-addons">
                       <div class="control is-expanded">
-                          {{ form.name }}
+                          {{ form1.name }}
                       </div>
                       <div class="control">
                           <button class="button is-info">
