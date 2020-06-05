@@ -22,8 +22,10 @@ def index(request):
         form1 = CityForm(request.POST, prefix='city')
         if form1.is_valid():
             form1.save()
+            print("form1 looking nice")
     else:
         form1 = CityForm(prefix='city')
+        print("bottom text")
 
     if request.method == 'POST' and not form1.is_valid():
         form2 = MoodForm(request.POST, prefix='mood')
@@ -32,9 +34,11 @@ def index(request):
             form2.save()
             data = request.POST.copy()
             mood = data.get('mood')
+            print("come on set the mood i got candles")
 
     else:
         form2 = MoodForm(prefix='mood')
+        print("mood BROKE")
 
     weather_data = []
     data = request.POST.copy()
