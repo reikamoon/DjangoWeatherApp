@@ -37,7 +37,7 @@ def index(request):
 
     weather_data = []
     data = request.POST.copy()
-    mood = data.get('mood-mood')
+    mood = data.get('mood')
 
     for city in cities:
 
