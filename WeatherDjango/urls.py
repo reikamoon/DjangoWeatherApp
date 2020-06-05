@@ -23,4 +23,8 @@ urlpatterns = [
 
     #Accounts
     path('accounts/', include('accounts.urls')),
+
+    #Moods
+    path('mood/', include('mood.urls')),
+
 ]
