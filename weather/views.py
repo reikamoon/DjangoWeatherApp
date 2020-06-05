@@ -30,6 +30,7 @@ def index(request):
         form1 = CityForm(prefix='city')
         if form2.is_valid():
             form2.save()
+            data = request.POST.copy()
             mood = data.get('mood')
 
     else:
